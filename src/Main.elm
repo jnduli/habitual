@@ -82,7 +82,7 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  div []
+  div [ class "row" ]
   [ displayChangerView model
   , (
     case model.taskDisplay of
@@ -95,16 +95,16 @@ view model =
 
 displayChangerView : Model -> Html Msg
 displayChangerView model =
-  div []
-  [ button [ onClick (DisplayUpdate TaskUpdate) ] [ text "Edit Tasks" ]
-  , button [ onClick (DisplayUpdate DailyHabit) ] [ text "Daily Habit" ]
-  , button [ onClick (DisplayUpdate Report) ] [ text "Report" ]
-  ]
+  div [ class "col c12" ]
+    [ button [ class "btn btn-sm", onClick (DisplayUpdate TaskUpdate) ] [ text "Edit Tasks" ]
+    , button [ class "btn btn-sm", onClick (DisplayUpdate DailyHabit) ] [ text "Daily Habit" ]
+    , button [ class "btn btn-sm", onClick (DisplayUpdate Report) ] [ text "Report" ]
+    ]
 
 
 taskView : Model -> Html Msg
 taskView model = 
-  div []
+  div [ class "col c12" ]
   [ input [ placeholder "Task to Add", value model.newTask, onInput Change ] []
   , button [ onClick Add ] [ text "Add" ]
   , viewTasks model.tasks
@@ -113,7 +113,8 @@ taskView model =
 
 dailyHabit : Model -> Html Msg
 dailyHabit model = 
-  ul [] (List.map (\n -> dailyTaskShow n model.doneTasks) model.tasks)
+  div [ class "col c12" ]
+  [ ul [] (List.map (\n -> dailyTaskShow n model.doneTasks) model.tasks) ]
 
 
 dailyTaskShow : Task -> Set Int -> Html Msg
@@ -128,13 +129,13 @@ dailyTaskShow task doneTasks =
 
 dailyView : Model -> Html Msg
 dailyView model =
-  div []
+  div [ class "col c12" ]
   [ p [] [ text "Add daily view thing" ]
   ]
 
 viewTable : Html Msg
 viewTable = 
-  div []
+  div [ class "col c12" ]
   [ table [] 
   [ thead [] 
   [ th [] [text "Task"]
